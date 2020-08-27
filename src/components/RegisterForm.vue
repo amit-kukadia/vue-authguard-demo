@@ -12,7 +12,7 @@
       <b-input type="password" v-model="password" value="iwantmytreasure" password-reveal></b-input>
     </b-field>
 
-    <b-button class='is-primary' expanded @click="registerAndRedirect">Submit</b-button>
+    <b-button class="is-primary" expanded @click="registerAndRedirect">Submit</b-button>
   </section>
 </template>
 
@@ -20,9 +20,9 @@
 export default {
   data() {
     return {
-        name:'',
-        email:'',
-        password:''
+        name:"",
+        email:"",
+        password:""
     };
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <div class="content is-large">
-    <PostCard :post="postData" :isClickable = 'false' class='mt-4' />
-    <CommentsCard :postId='$route.params.id' class='mt-3' />
+    <PostCard :post="postData" :isClickable = "false" class="mt-4" />
+    <CommentsCard :postId="$route.params.id" class="mt-3" />
     <b-loading :is-full-page="true" v-model="isLoading" :can-cancel="false"></b-loading>
   </div>
 </template>

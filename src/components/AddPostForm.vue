@@ -38,8 +38,8 @@ export default {
     add() {
       this.isLoading = true
       this.addPost({ title: this.title, body: this.body }).then((data) => {
-        this.$emit('postAdded',data.data)
-        this.$emit('close')
+        this.$emit("postAdded",data.data)
+        this.$emit("close")
         this.isLoading = false
       }).catch(()=>{
           this.isLoading = false

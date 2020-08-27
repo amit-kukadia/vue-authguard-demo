@@ -1,28 +1,34 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { auth } from "../firebase"
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Post from "../views/Post.vue";
 
-import store from "../store";
+// import store from "../store";
 
-const getAuthStatus = () => {
-  let loggedIn
+// const getAuthStatus = () => {
+//   let loggedIn
 
-  if (store.state.loggedIn === null) {
-    loggedIn = localStorage.getItem("loggedIn");
-    if (loggedIn) {
-      store.commit("LOGIN");
-    } else {
-      store.commit("LOGOUT");
-    }
-  } else {
-    loggedIn = store.state.loggedIn
-  }
+//   if (store.state.loggedIn === null) {
+//     loggedIn = localStorage.getItem("loggedIn");
+//     if (loggedIn) {
+//       store.commit("LOGIN");
+//     } else {
+//       store.commit("LOGOUT");
+//     }
+//   } else {
+//     loggedIn = store.state.loggedIn
+//   }
 
-  return loggedIn;
-};
+//   return loggedIn;
+// };
+
+const getAuthStatus = ()=>{
+  if(auth.currentUser) return true
+  else return false
+}
 
 const ifNotAuthenticated = (to, from, next) => {
   console.log("route");
@@ -38,7 +44,7 @@ const ifAuthenticated = (to, from, next) => {
     next()
     return
   }
-  next('/')
+  next("/")
 }
 
 Vue.use(VueRouter);

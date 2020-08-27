@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card" @click="openPost" :class="{'clickable':isClickable}">
+    <div class="card" @click="openPost" :class='{"clickable":isClickable}'>
       <div class="card-header">
         <div class="card-header-title">{{post.title}}</div>
       </div>

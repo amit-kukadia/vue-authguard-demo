@@ -1,13 +1,19 @@
 <template>
   <section>
-    <b-field label="Email"  >
+    <b-field label="Email">
       <b-input type="email" v-model="email"></b-input>
     </b-field>
 
     <b-field label="Password">
-      <b-input type="password" v-model='password'  ></b-input>
+      <b-input type="password" v-model="password"></b-input>
     </b-field>
-    <b-button expanded class="is-primary" :loading='loading' @click="loginAndRedirect">Submit</b-button>
+    <b-message
+      title="Error"
+      type="is-danger"
+      aria-close-label="Close message"
+      v-model="showError"
+    >{{errorMessage}}</b-message>
+    <b-button expanded class="is-primary" :loading="loading" @click="loginAndRedirect">Submit</b-button>
   </section>
 </template>
 
@@ -20,32 +26,44 @@ export default {
   data() {
     return {
       email: "",
-      password : "",
-      loading : false
+      password: "",
+      loading: false,
+      errorMessage :"",
+      showError : false
     };
   },
-    validations: {
+  validations: {
     email: {
       required,
-      minLength: minLength(6)
+      minLength: minLength(6),
     },
     password: {
       required,
-      minLength: minLength(6)
-    }
+      minLength: minLength(6),
+    },
   },
   methods: {
     ...mapActions(["login"]),
     loginAndRedirect() {
-      console.log('login and rediredt')
-        this.loading=true
-      this.login().then(() => {
-        this.$buefy.notification.open({
-          message: "Login successfull",
-          type: "is-success",
+      console.log("login and rediredt");
+      this.loading = true;
+      this.login({
+        email: this.email,
+        password: this.password,
+      })
+        .then(() => {
+          this.$buefy.notification.open({
+            message: "Login successfull",
+            type: "is-success",
+          });
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.errorMessage = error.message
+          this.showError = true
+          console.log(error);
         });
-        this.$router.push("/dashboard");
-      });
     },
   },
 };

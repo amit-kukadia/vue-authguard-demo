@@ -6,11 +6,11 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <router-link v-if='!loggedIn'  :to="{ path: '/register' }" class="button is-primary">
+          <router-link v-if="!loggedIn"  :to="{ path: '/register' }" class="button is-primary">
             <strong>Sign up</strong>
           </router-link>
-          <router-link v-if='!loggedIn' :to="{ path: '/' }" class="button is-light">Log in</router-link>
-          <button v-if='loggedIn' @click="logoutAndRedirect" class="button is-primary">
+          <router-link v-if="!loggedIn" :to="{ path: '/' }" class="button is-light">Log in</router-link>
+          <button v-if="loggedIn" @click="logoutAndRedirect" class="button is-primary">
             <strong>Logout</strong>
           </button>
         </div>
@@ -19,7 +19,7 @@
   </b-navbar>
 </template>
 <script>
-import {mapState,mapActions} from 'vuex'
+import {mapState,mapActions} from "vuex"
 export default {
     computed:{
     ...mapState(["loggedIn"]),
@@ -27,8 +27,10 @@ export default {
     methods:{
     ...mapActions(["logout"]),
     logoutAndRedirect(){
-        this.logout()
-        this.$router.push('/')
+        this.logout().then(()=>{
+          this.$router.push("/")
+        })
+        
     }
     }
 }
